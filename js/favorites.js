@@ -18,10 +18,14 @@ window.addEventListener('load', () =>{
         favorites.forEach(movie => {
             const movieElement = document.createElement('div')
             movieElement.classList.add('card-favorite');
-            console.log(movie.title)
-            movieElement.innerHTML = `<h3>${movie.title}</h3>
+            const posterFav = document.createElement('img')
+            posterFav.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+            posterFav.alt = movie.title;
+            movieElement.innerHTML = `<p>${movie.title}<p>
             `
+            movieElement.appendChild(posterFav)
             listFavorites.appendChild(movieElement)
+
         })
     }
 })

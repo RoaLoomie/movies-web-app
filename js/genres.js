@@ -81,7 +81,6 @@ function getMoviesByGenre(genreId, page) {
     fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&language=en-US&page=${page}`, options)
     .then(res => res.json())
     .then(data => {
-        console.log(data);
         titulo.innerHTML = '';
         genreList.innerHTML = '';
         movieList.innerHTML = '';
@@ -99,7 +98,12 @@ function getMoviesByGenre(genreId, page) {
             const poster = document.createElement('img');
             const releaseDate = document.createElement('p')
             const favorite = document.createElement('i')
-            favorite.classList.add('fa-regular', 'fa-heart')
+            favorite.classList.add('fa-regular', 'fa-heart');
+            if (favorites.some(fav => {
+                return fav.id === movie.id
+            })){
+              favorite.classList.add('favorite');
+          }
             favorite.addEventListener('click', () => addToFavorite(movie, favorite))
 
             poster.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
@@ -128,7 +132,9 @@ function getMoviesByGenre(genreId, page) {
     .catch(err => console.error(err))
 }
 
-const favorites = [];
+
+
+const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 const addToFavorite = (movie, icon) => {
   const index = favorites.findIndex(fav => fav.id === movie.id)
   if (index === -1){
