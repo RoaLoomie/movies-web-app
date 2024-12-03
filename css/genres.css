@@ -1,0 +1,127 @@
+* {
+    box-sizing:border-box;
+    padding:0;
+    margin: 0;
+}
+
+body{
+    background-color:#f5f5f5eb;
+}
+.nav-menu{
+    list-style: none;
+    display: flex;  
+    margin: 0;
+    justify-content: center;
+    gap:15px;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    list-style: none;
+    color: aliceblue;
+   
+}
+
+.nav-item{
+    position: relative;
+}
+
+.genres-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+
+}
+
+.genre-card{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 25px;
+    align-items: center;
+    background-color: rgb(66, 65, 65);
+    border-radius: 10px;
+}
+
+.genre-card a{
+    text-decoration: none;
+    font-size: 12px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:aliceblue;
+    padding: 10px;
+    
+} 
+.genre-poster {
+    width: 100%; 
+}
+.genre-poster img{
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    transition: transform 0.4 ease-in-out;
+}
+
+.genre-poster:hover{
+    transform: scale(1.02);
+}
+
+.movies-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    gap: 25px;
+    padding: 20px;
+}
+
+.movie-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    background-color:#d0c5a7;
+    transition: transform 0.3s ease-in-out;    
+}
+
+.movie-card:hover{
+    transform: scale(1.05);
+}
+
+.poster-movie img{
+    width: 100%;
+    display: block;
+}
+.movie-details{
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.movie-details h2{
+    font-size: 12px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.pagination{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+.pagination button{
+    border: none;
+    background-color: transparent;
+}
+
+.pagination button i {
+    font-size: 30px;
+    transition: transform 0.2 ease-in-out;
+}
+
+.pagination button i:hover{
+    transform: scale(1.5);
+}
