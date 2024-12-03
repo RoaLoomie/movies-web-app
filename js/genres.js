@@ -42,7 +42,7 @@ function loadGenres(){
             let genreImage = 'default.jpg';
 
             if (movieData && movieData.results && movieData.results.length > 0) {
-              genreImage = movieData.results[3].poster_path; // Tomar la imagen de la primera película
+              genreImage = movieData.results[3].poster_path;
             }
             const genreImageElement = document.createElement('img');
             genreImageElement.src = `https://image.tmdb.org/t/p/w300${genreImage}`;
@@ -55,12 +55,13 @@ function loadGenres(){
           })  
           .catch(err => console.log(err))
           genreList.appendChild(genreCard);
-          genreList.addEventListener('click', (event) => {
-            const genreId = event.target.href.split('#')[1]
+          
+          genreCard.addEventListener('click', (event) => {
+            const genreId =genre.id;
             if (genreId){
                 currentGenreId = genreId;
                 currentPage = 1;
-                getMoviesByGenre(genreId, currentPage)
+                getMoviesByGenre(currentGenreId, currentPage)
             }
         });
       });
@@ -74,12 +75,14 @@ let totalResults = 0;
 let currentGenreId = null;
 
 const movieList = document.querySelector('.movies-container')
+const titulo = document.querySelector('.titulo')
 
 function getMoviesByGenre(genreId, page) {
     fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&language=en-US&page=${page}`, options)
     .then(res => res.json())
     .then(data => {
         console.log(data);
+        titulo.innerHTML = '';
         genreList.innerHTML = '';
         movieList.innerHTML = '';
         totalResults = data.total_results
@@ -94,19 +97,22 @@ function getMoviesByGenre(genreId, page) {
 
             const title = document.createElement('h2');
             const poster = document.createElement('img');
-            const releaseData = document.createElement('p')
+            const releaseDate = document.createElement('p')
             const favorite = document.createElement('i')
             favorite.classList.add('fa-regular', 'fa-heart')
+            favorite.addEventListener('click', () => addToFavorite(movie, favorite))
 
-            poster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
+            poster.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
             poster.alt = movie.title;
     
             title.textContent = movie.title;
-            releaseData.textContent = movie.release_date;
+            const releaseData = new Date(movie.release_date);
+            const year = releaseData.getFullYear();
+            releaseDate.textContent = year
           
             posterContainer.appendChild(poster)
             movieDetails.appendChild(title)
-            movieDetails.appendChild(releaseData)
+            movieDetails.appendChild(releaseDate)
             movieDetails.appendChild(favorite)
             movieItem.appendChild(posterContainer)
             movieItem.appendChild(movieDetails)
@@ -122,6 +128,18 @@ function getMoviesByGenre(genreId, page) {
     .catch(err => console.error(err))
 }
 
+const favorites = [];
+const addToFavorite = (movie, icon) => {
+  const index = favorites.findIndex(fav => fav.id === movie.id)
+  if (index === -1){
+    favorites.push(movie)
+    icon.classList.add('favorite')
+}else{
+  favorites.splice(index, 1)
+  icon.classList.remove('favorite'); 
+}
+ localStorage.setItem('favorites', JSON.stringify(favorites))
+}
 
 function updatePaginationButtons(){
   const totalPages = Math.ceil(totalResults / moviesPerPage);

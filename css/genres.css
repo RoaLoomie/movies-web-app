@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lexend:wght@100..900&display=swap');
+
+
 * {
     box-sizing:border-box;
     padding:0;
@@ -46,7 +50,7 @@ body{
 .genre-card a{
     text-decoration: none;
     font-size: 12px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family:"Anton", Verdana, sans-serif;
     color:aliceblue;
     padding: 10px;
     
@@ -93,17 +97,24 @@ body{
     display: block;
 }
 .movie-details{
-    padding: 5px;
-    margin: 10px;
-    text-align: center;
+ 
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 .movie-details h2{
-    font-size: 12px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-family: 'Lexend', Geneva, Verdana, sans-serif;
 }
+
+.fa-heart{
+    font-size: 20px;
+    padding: 10px;
+}
+.fa-heart.favorite {
+    color: red;
+    font-weight: bold;
+  }
 
 .pagination{
     display: flex;
